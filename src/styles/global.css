@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+/* Adding DaisyUI theme plugin configuration for "tavue" theme */
+@plugin "daisyui/theme" {
+    name: "tavue";
+    default: true;
+    prefersdarks: false;
+    color-scheme: "light";
+
+    /* Thème DaisyUI personnalisé Tavue configuré correctement */
+
+    --color-base-100: oklch(from #ffffff l c h);
+    --color-base-200: oklch(from #f6faff l c h);
+    --color-base-300: oklch(from #e9f4ff l c h);
+    --color-base-content: oklch(from #1e1e1e l c h);
+
+    /* Palette personnalisée */
+    --color-primary: oklch(from #3d5270 l c h);
+    --color-primary-content: oklch(from #ffffff l c h);
+
+    --color-secondary: oklch(from #ffd2d2 l c h);
+    --color-secondary-content: oklch(from #1e1e1e l c h);
+
+    --color-accent: oklch(from #b9e4ff l c h);
+    --color-accent-content: oklch(from #1e1e1e l c h);
+
+    --color-neutral: oklch(from #ffffff l c h);
+    --color-neutral-content: oklch(from #000000 l c h);
+
+    --color-info: oklch(from #b9e4ff l c h);
+    --color-success: oklch(75% 0.15 150);
+    --color-warning: oklch(80% 0.18 85);
+    --color-error: oklch(65% 0.22 15);
+
+    --radius-selector: 0.625rem;
+    --radius-field: 0.625rem;
+    --radius-box: 0.625rem;
+
+    --size-selector: 45px;
+    --size-field: 45px;
+
+    --border: 1.5px;
+}
+
+/* Added Century font import and adjusted font loading */
+/* Removed duplicate font imports, now handled in Layout.astro head */
+@import url("https://fonts.googleapis.com/css2?family=Century+Schoolbook:wght@400;700&display=swap");
+
+:root,
+body,
+html,
+*,
+*::before,
+*::after {
+    font-family: "Encode Sans", sans-serif !important;
+}
+
+/* Applied Century font to headings - kept separate to override body font */
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Century Schoolbook", serif !important;
+}
+
+html,
+body {
+    background-color: var(--color-base-100);
+    color: var(--color-base-content);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Styles personnalisés pour les boutons */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    border-radius: var(--radius-selector);
+    font-weight: 600;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: oklch(from var(--color-primary) calc(l - 0.1) c h);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-secondary-content);
+    border-radius: var(--radius-selector);
+    font-weight: 600;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: oklch(from var(--color-secondary) calc(l - 0.1) c h);
+}
+
+.btn-outline-black {
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-content);
+    border: 1.5px solid var(--color-neutral-content);
+    border-radius: var(--radius-selector);
+    font-weight: 500;
+}
+
+/* Reduced input heights and padding */
+.input,
+.input-bordered {
+    background-color: var(--color-base-100);
+    border-color: var(--color-base-300);
+    border-radius: var(--radius-field);
+    color: var(--color-base-content);
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+}
+
+.input::placeholder,
+.input-bordered::placeholder {
+    color: var(--color-base-content);
+    opacity: 0.5;
+}
+
+.input:focus,
+.input-bordered:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}

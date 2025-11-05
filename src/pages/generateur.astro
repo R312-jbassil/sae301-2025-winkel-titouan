@@ -1,0 +1,337 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Configurateur - Ta Vue">
+    <Header />
+
+    <main class="flex-1 bg-base-100">
+        <div class="max-w-7xl mx-auto px-8 py-12">
+            <!-- Title Section -->
+            <div class="mb-12">
+                <h1 class="text-5xl font-normal mb-4">Configurateur</h1>
+                <div class="w-full h-1 bg-accent mb-6"></div>
+                <p class="text-gray-600 text-base">
+                    Explorez nos matériaux premium et nos couleurs raffinées.
+                    Ajustez la taille, le pont, et visualisez instantanément le
+                    résultat de votre création.
+                </p>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Left Panel - Branches -->
+                <div class="lg:col-span-3">
+                    <div class="bg-base-200 rounded-2xl p-6">
+                        <h2
+                            class="text-2xl font-normal mb-6 pb-3 border-b border-base-300"
+                        >
+                            Branches
+                        </h2>
+
+                        <!-- Couleurs Section -->
+                        <div class="mb-6">
+                            <h3 class="text-base font-normal mb-4">Couleurs</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <!-- Noir -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-black"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Noir</span>
+                                </button>
+
+                                <!-- Écaille -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-amber-700"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Écaille</span>
+                                </button>
+
+                                <!-- Bleu -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Bleu</span>
+                                </button>
+
+                                <!-- Rose -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-secondary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Rose</span>
+                                </button>
+
+                                <!-- Blanc -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-white border border-gray-300"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Blanc</span>
+                                </button>
+
+                                <!-- Vert -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-green-400"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Vert</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Matériau Section -->
+                        <div>
+                            <h3 class="text-base font-normal mb-4">Matériau</h3>
+                            <select
+                                class="select select-bordered w-full bg-base-100"
+                            >
+                                <option selected>Métal</option>
+                                <option>Acétate</option>
+                                <option>Titane</option>
+                                <option>Bois</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center - Glasses Preview -->
+                <div class="lg:col-span-6 flex items-center justify-center">
+                    <div class="w-full max-w-2xl">
+                        <img
+                            src="/src/assets/lunettes.svg"
+                            alt="Lunettes configurables"
+                            class="w-full h-auto"
+                        />
+                    </div>
+                </div>
+
+                <!-- Right Panel - Monture -->
+                <div class="lg:col-span-3">
+                    <div class="bg-base-200 rounded-2xl p-6">
+                        <h2
+                            class="text-2xl font-normal mb-6 pb-3 border-b border-base-300"
+                        >
+                            Monture
+                        </h2>
+
+                        <!-- Couleurs Section -->
+                        <div class="mb-6">
+                            <h3 class="text-base font-normal mb-4">Couleurs</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <!-- Noir -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-black"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Noir</span>
+                                </button>
+
+                                <!-- Écaille -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-amber-700"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Écaille</span>
+                                </button>
+
+                                <!-- Bleu -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Bleu</span>
+                                </button>
+
+                                <!-- Rose -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-secondary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Rose</span>
+                                </button>
+
+                                <!-- Blanc -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-white border border-gray-300"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Blanc</span>
+                                </button>
+
+                                <!-- Vert -->
+                                <button
+                                    class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-green-400"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Vert</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Matériau Section -->
+                        <div>
+                            <h3 class="text-base font-normal mb-4">Matériau</h3>
+                            <select
+                                class="select select-bordered w-full bg-base-100"
+                            >
+                                <option selected>Métal</option>
+                                <option>Acétate</option>
+                                <option>Titane</option>
+                                <option>Bois</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section - Sliders and Price -->
+            <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Sliders Card -->
+                <div class="bg-base-200 rounded-2xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Taille des verres -->
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-normal">
+                                    Taille des verres
+                                </h3>
+                                <span class="text-sm font-semibold">52mm</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="48"
+                                max="56"
+                                value="52"
+                                class="range range-primary w-full"
+                            />
+                            <div
+                                class="flex justify-between text-xs text-gray-500 mt-2"
+                            >
+                                <span>48mm</span>
+                                <span>56mm</span>
+                            </div>
+                        </div>
+
+                        <!-- Largeur du pont -->
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-normal">
+                                    Largeur du pont
+                                </h3>
+                                <span class="text-sm font-semibold">16mm</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="14"
+                                max="22"
+                                value="16"
+                                class="range range-primary w-full"
+                            />
+                            <div
+                                class="flex justify-between text-xs text-gray-500 mt-2"
+                            >
+                                <span>14mm</span>
+                                <span>22mm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price and Actions Card -->
+                <div class="bg-base-200 rounded-2xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-lg font-normal">Prix configuré :</h3>
+                        <div class="bg-accent px-6 py-2 rounded-lg">
+                            <span class="text-2xl font-semibold">110 €</span>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-600 mb-6">Fabriqué en France</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button
+                            class="btn btn-primary text-white border-2 border-black"
+                        >
+                            Ajouter au panier
+                        </button>
+                        <button
+                            class="btn btn-primary text-white border-2 border-black"
+                        >
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    /* Custom range slider styling */
+    .range {
+        height: 0.5rem;
+        background: #e5e7eb;
+        border-radius: 9999px;
+    }
+
+    .range::-webkit-slider-thumb {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: var(--color-primary);
+        border-radius: 9999px;
+        cursor: pointer;
+    }
+
+    .range::-moz-range-thumb {
+        width: 1.25rem;
+        height: 1.25rem;
+        background: var(--color-primary);
+        border-radius: 9999px;
+        cursor: pointer;
+        border: none;
+    }
+</style>

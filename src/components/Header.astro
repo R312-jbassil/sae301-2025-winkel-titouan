@@ -1,0 +1,61 @@
+---
+
+---
+
+<header class="bg-base-100 border-b border-base-300 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-8 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo agrandi à w-24 h-24 -->
+            <div class="flex items-center">
+                <div class="w-24 h-24 flex items-center justify-center">
+                    <img
+                        src="/src/assets/logo.svg"
+                        alt="Ta Vue Logo"
+                        class="w-full h-full"
+                    />
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-12">
+                <a
+                    href="#"
+                    class="text-base-content hover:text-primary transition font-medium"
+                    >Configurateur</a
+                >
+                <a
+                    href="#"
+                    class="text-base-content hover:text-primary transition font-medium"
+                    >Générer avec IA</a
+                >
+                <a
+                    href="#"
+                    class="text-base-content hover:text-primary transition font-medium"
+                    >Collection</a
+                >
+            </nav>
+
+            <!-- CTA Login avec couleur secondaire -->
+            <button
+                id="auth-status-btn"
+                class="btn btn-secondary btn-sm h-8 text-sm border-[1px] border-black"
+            >
+                Vous n'êtes pas connecté
+            </button>
+        </div>
+    </div>
+</header>
+
+<script>
+    import pb from "../lib/pocketbase";
+
+    // Check if user is already authenticated
+    const authStatusBtn = document.getElementById("auth-status-btn");
+
+    if (pb.authStore.isValid && pb.authStore.model) {
+        const user = pb.authStore.model;
+        if (authStatusBtn) {
+            authStatusBtn.textContent = `Bonjour ${user.prenom || user.nom || "Utilisateur"}`;
+        }
+    }
+</script>
