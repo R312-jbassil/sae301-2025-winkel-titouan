@@ -26,8 +26,23 @@ export class GlassesStorage {
             console.log("[v0] Prepared record data:", recordData)
 
             const record = await pb.collection(this.collection).create(recordData)
-
             console.log("[v0] Glasses saved successfully:", record.id)
+
+            if (pb.authStore.isValid) {
+                const userId = pb.authStore.model?.id
+                const user = await pb.collection("users").getOne(userId)
+
+                // Get existing paire_personnalisee array or create empty array
+                const existingPaires = user.paire_personnalisee || []
+
+                // Add new glasses ID to the array
+                await pb.collection("users").update(userId, {
+                    paire_personnalisee: [...existingPaires, record.id],
+                })
+
+                console.log("[v0] Glasses added to user's collection")
+            }
+
             return record
         } catch (error) {
             console.error("[v0] Error saving glasses:", error)

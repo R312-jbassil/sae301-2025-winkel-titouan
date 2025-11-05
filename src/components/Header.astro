@@ -19,7 +19,7 @@
             <!-- Navigation -->
             <nav class="hidden md:flex items-center gap-12">
                 <a
-                    href="#"
+                    href="/configurateur"
                     class="text-base-content hover:text-primary transition font-medium"
                     >Configurateur</a
                 >
@@ -29,19 +29,27 @@
                     >Générer avec IA</a
                 >
                 <a
-                    href="#"
+                    href="/collection"
                     class="text-base-content hover:text-primary transition font-medium"
                     >Collection</a
                 >
             </nav>
 
-            <!-- CTA Login avec couleur secondaire -->
-            <button
-                id="auth-status-btn"
-                class="btn btn-secondary btn-sm h-8 text-sm border-[1px] border-black"
-            >
-                Vous n'êtes pas connecté
-            </button>
+            <!-- Added logout button that appears when user is connected -->
+            <div class="flex items-center gap-4">
+                <button
+                    id="auth-status-btn"
+                    class="btn btn-secondary btn-sm h-8 text-sm border-[1px] border-black"
+                >
+                    Vous n'êtes pas connecté
+                </button>
+                <button
+                    id="logout-btn"
+                    class="btn btn-error btn-sm h-8 text-sm border-[1px] border-black hidden"
+                >
+                    Se déconnecter
+                </button>
+            </div>
         </div>
     </div>
 </header>
@@ -51,11 +59,22 @@
 
     // Check if user is already authenticated
     const authStatusBtn = document.getElementById("auth-status-btn");
+    const logoutBtn = document.getElementById("logout-btn");
 
     if (pb.authStore.isValid && pb.authStore.model) {
         const user = pb.authStore.model;
         if (authStatusBtn) {
             authStatusBtn.textContent = `Bonjour ${user.prenom || user.nom || "Utilisateur"}`;
         }
+        if (logoutBtn) {
+            logoutBtn.classList.remove("hidden");
+        }
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            pb.authStore.clear();
+            window.location.href = "/";
+        });
     }
 </script>

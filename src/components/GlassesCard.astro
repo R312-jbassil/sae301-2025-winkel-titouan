@@ -1,0 +1,86 @@
+---
+const { id, nom, code_svg, taille_verre, largeur_pont, couleur } = Astro.props;
+---
+
+<div
+    class="bg-base-200 rounded-2xl p-6 flex flex-col glasses-card"
+    data-glass-id={id}
+>
+    <div class="mb-4">
+        <h3 class="text-xl font-normal mb-2">{nom || "Sans nom"}</h3>
+        <div class="text-sm text-gray-600">
+            <p>Taille: {taille_verre}mm</p>
+            <p>Pont: {largeur_pont}mm</p>
+            <p>Couleur: {couleur}</p>
+        </div>
+    </div>
+
+    <div
+        class="mb-4 bg-white rounded-lg p-4 flex items-center justify-center min-h-[200px]"
+    >
+        <Fragment
+            set:html={code_svg ||
+                '<p class="text-gray-400">Aperçu non disponible</p>'}
+        />
+    </div>
+
+    <div class="mb-4">
+        <div class="bg-accent px-4 py-2 rounded-lg inline-block">
+            <span class="text-xl font-semibold">110 €</span>
+        </div>
+    </div>
+
+    <div class="flex flex-col gap-2 mt-auto">
+        <button
+            class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm"
+            disabled
+        >
+            Modifier à l'aide de l'IA
+        </button>
+        <button
+            class="btn btn-error border-2 border-black h-10 min-h-0 text-sm delete-btn"
+        >
+            Supprimer
+        </button>
+    </div>
+</div>
+
+<script>
+    import { CollectionManager } from "../js/collection-manager.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const manager = new CollectionManager();
+        const cards = document.querySelectorAll(".glasses-card");
+
+        cards.forEach((card) => {
+            const deleteBtn = card.querySelector(".delete-btn");
+            const glassId = card.getAttribute("data-glass-id");
+
+            deleteBtn?.addEventListener("click", async () => {
+                if (
+                    confirm(
+                        "Êtes-vous sûr de vouloir supprimer cette paire de lunettes ?",
+                    )
+                ) {
+                    try {
+                        await manager.deleteGlasses(glassId);
+                        card.remove();
+
+                        const remainingCards =
+                            document.querySelectorAll(".glasses-card");
+                        if (remainingCards.length === 0) {
+                            const emptyState =
+                                document.getElementById("empty-state");
+                            emptyState?.classList.remove("hidden");
+                        }
+                    } catch (error) {
+                        console.error("[v0] Error deleting glasses:", error);
+                        alert(
+                            "Erreur lors de la suppression. Veuillez réessayer.",
+                        );
+                    }
+                }
+            });
+        });
+    });
+</script>

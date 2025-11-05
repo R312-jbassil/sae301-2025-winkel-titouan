@@ -1,0 +1,191 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Ma Collection - Ta Vue">
+    <Header />
+
+    <main class="flex-1 bg-base-100">
+        <div class="max-w-7xl mx-auto px-8 py-16">
+            <!-- Title Section -->
+            <div class="mb-12">
+                <h1 class="text-5xl font-normal mb-4">Ma Collection</h1>
+                <div class="w-full h-1 bg-accent mb-6"></div>
+                <p class="text-gray-600 text-base">
+                    Retrouvez toutes vos créations personnalisées. Modifiez-les
+                    avec l'IA ou supprimez-les selon vos envies.
+                </p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="text-center py-16">
+                <span class="loading loading-spinner loading-lg"></span>
+                <p class="text-gray-500 mt-4">
+                    Chargement de votre collection...
+                </p>
+            </div>
+
+            <!-- Glasses Grid -->
+            <div
+                id="glasses-grid"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden"
+            >
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-16">
+                <p class="text-gray-500 text-lg mb-6">
+                    Vous n'avez pas encore créé de lunettes.
+                </p>
+                <a
+                    href="/configurateur"
+                    class="btn btn-primary border-2 border-black"
+                >
+                    Créer ma première paire
+                </a>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="hidden text-center py-16">
+                <p class="text-red-500 text-lg mb-6">
+                    Erreur lors du chargement de votre collection.
+                </p>
+                <button
+                    id="retry-btn"
+                    class="btn btn-primary border-2 border-black"
+                >
+                    Réessayer
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<script>
+    import { CollectionManager } from "../js/collection-manager.js";
+    import pb from "../lib/pocketbase";
+
+    const glassesGrid = document.getElementById("glasses-grid");
+    const emptyState = document.getElementById("empty-state");
+    const loadingState = document.getElementById("loading-state");
+    const errorState = document.getElementById("error-state");
+    const retryBtn = document.getElementById("retry-btn");
+
+    async function loadGlasses() {
+        try {
+            loadingState?.classList.remove("hidden");
+            glassesGrid?.classList.add("hidden");
+            emptyState?.classList.add("hidden");
+            errorState?.classList.add("hidden");
+
+            console.log("[v0] Checking authentication...");
+            console.log("[v0] Auth valid:", pb.authStore.isValid);
+            console.log("[v0] User:", pb.authStore.model);
+
+            if (!pb.authStore.isValid) {
+                console.log("[v0] User not authenticated, showing empty state");
+                loadingState?.classList.add("hidden");
+                emptyState?.classList.remove("hidden");
+                return;
+            }
+
+            const manager = new CollectionManager();
+            const glasses = await manager.getUserGlasses();
+
+            console.log("[v0] Glasses loaded:", glasses);
+
+            loadingState?.classList.add("hidden");
+
+            if (!glasses || glasses.length === 0) {
+                emptyState?.classList.remove("hidden");
+                return;
+            }
+
+            glassesGrid.innerHTML = "";
+            glasses.forEach((glass) => {
+                const card = createGlassCard(glass);
+                glassesGrid.appendChild(card);
+            });
+
+            glassesGrid?.classList.remove("hidden");
+        } catch (error) {
+            console.error("[v0] Error loading glasses:", error);
+            loadingState?.classList.add("hidden");
+            errorState?.classList.remove("hidden");
+        }
+    }
+
+    function createGlassCard(glass) {
+        const card = document.createElement("div");
+        card.className =
+            "bg-base-200 rounded-2xl p-6 flex flex-col glasses-card";
+        card.setAttribute("data-glass-id", glass.id);
+
+        card.innerHTML = `
+      <div class="mb-4">
+        <h3 class="text-xl font-normal mb-2">${glass.nom || "Sans nom"}</h3>
+        <div class="text-sm text-gray-600">
+          <p>Taille: ${glass.taille_verre}mm</p>
+          <p>Pont: ${glass.largeur_pont}mm</p>
+          <p>Couleur: ${glass.couleur}</p>
+        </div>
+      </div>
+
+      <div class="mb-4 bg-white rounded-lg p-4 flex items-center justify-center min-h-[200px]">
+        ${glass.code_svg || '<p class="text-gray-400">Aperçu non disponible</p>'}
+      </div>
+
+      <div class="mb-4">
+        <div class="bg-accent px-4 py-2 rounded-lg inline-block">
+          <span class="text-xl font-semibold">110 €</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2 mt-auto">
+        <button class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm" disabled>
+          Modifier à l'aide de l'IA
+        </button>
+        <button class="btn btn-error border-2 border-black h-10 min-h-0 text-sm delete-btn">
+          Supprimer
+        </button>
+      </div>
+    `;
+
+        const deleteBtn = card.querySelector(".delete-btn");
+        deleteBtn?.addEventListener("click", async () => {
+            if (
+                confirm(
+                    "Êtes-vous sûr de vouloir supprimer cette paire de lunettes ?",
+                )
+            ) {
+                try {
+                    const manager = new CollectionManager();
+                    await manager.deleteGlasses(glass.id);
+                    card.remove();
+
+                    const remainingCards =
+                        document.querySelectorAll(".glasses-card");
+                    if (remainingCards.length === 0) {
+                        glassesGrid?.classList.add("hidden");
+                        emptyState?.classList.remove("hidden");
+                    }
+                } catch (error) {
+                    console.error("[v0] Error deleting glasses:", error);
+                    alert("Erreur lors de la suppression. Veuillez réessayer.");
+                }
+            }
+        });
+
+        return card;
+    }
+
+    // Load glasses on page load
+    loadGlasses();
+
+    // Retry button
+    retryBtn?.addEventListener("click", loadGlasses);
+</script>

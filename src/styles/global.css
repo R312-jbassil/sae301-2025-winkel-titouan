@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@import url("https://fonts.googleapis.com/css2?family=Century+Schoolbook:wght@400;700&display=swap");
+
 /* Adding DaisyUI theme plugin configuration for "tavue" theme */
 @plugin "daisyui/theme" {
     name: "tavue";
@@ -42,10 +44,6 @@
 
     --border: 1.5px;
 }
-
-/* Added Century font import and adjusted font loading */
-/* Removed duplicate font imports, now handled in Layout.astro head */
-@import url("https://fonts.googleapis.com/css2?family=Century+Schoolbook:wght@400;700&display=swap");
 
 :root,
 body,
@@ -128,3 +126,5 @@ body {
     border-color: var(--color-primary);
     outline: none;
 }
+
+/* Removed all custom range slider styling, using DaisyUI native range component */
