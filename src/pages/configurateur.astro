@@ -1,0 +1,545 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Configurateur - Ta Vue">
+    <Header />
+
+    <main class="flex-1 bg-base-100">
+        <div class="max-w-7xl mx-auto px-8 py-3">
+            <!-- Title Section -->
+            <div class="mb-3">
+                <h1 class="text-5xl font-normal mb-2">Configurateur</h1>
+                <div class="w-full h-1 bg-accent mb-3"></div>
+                <p class="text-gray-600 text-base">
+                    Explorez nos matériaux premium et nos couleurs raffinées.
+                    Ajustez la taille, le pont, et visualisez instantanément le
+                    résultat de votre création.
+                </p>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
+                <!-- Left Panel - Branches -->
+                <div class="lg:col-span-3">
+                    <div class="bg-base-200 rounded-2xl p-6">
+                        <h2
+                            class="text-2xl font-normal mb-6 pb-3 border-b border-base-300"
+                        >
+                            Branches
+                        </h2>
+
+                        <!-- Couleurs Section -->
+                        <div class="mb-6">
+                            <h3 class="text-base font-normal mb-4">Couleurs</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <!-- Added data-color and data-target attributes for color selection -->
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#000000"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-black"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Noir</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#92400e"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-amber-700"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Écaille</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#3b82f6"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Bleu</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#ec4899"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-secondary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Rose</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#ffffff"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-white border border-gray-300"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Blanc</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#4ade80"
+                                    data-target="branches"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-green-400"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Vert</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Matériau Section -->
+                        <div>
+                            <h3 class="text-base font-normal mb-4">Matériau</h3>
+                            <!-- Added id to capture materiau value -->
+                            <select
+                                id="materiau-branches"
+                                class="select select-bordered w-full bg-base-100 h-10 text-sm min-h-0"
+                            >
+                                <option selected>Métal</option>
+                                <option>Acétate</option>
+                                <option>Titane</option>
+                                <option>Bois</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center - Glasses Preview -->
+                <!-- Replaced img with inline SVG for manipulation -->
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="w-full max-w-lg max-h-64">
+                        <svg
+                            id="glasses-svg"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            version="1.1"
+                            viewBox="0 0 595.28 841.89"
+                            class="w-full h-auto"
+                        >
+                            <defs>
+                                <style>
+                                    .cls-1 {
+                                        fill: #706f6f;
+                                        mix-blend-mode: multiply;
+                                    }
+
+                                    .cls-2 {
+                                        isolation: isolate;
+                                    }
+
+                                    .cls-3,
+                                    .cls-4 {
+                                        fill: #ffffff;
+                                    }
+
+                                    .cls-4 {
+                                        stroke: #1d1d1b;
+                                        stroke-miterlimit: 10;
+                                        stroke-width: 0.5px;
+                                    }
+
+                                    .cls-5 {
+                                        fill: none;
+                                        opacity: 0.75;
+                                    }
+                                </style>
+                            </defs>
+                            <g class="cls-2">
+                                <g id="branches">
+                                    <path
+                                        class="cls-4"
+                                        d="M108.83,155.14s49.35-5.57,54.93-8.76,11.14-7.96,19.5-9.55,64.48-11.14,64.48-11.14c0,0,7.16-1.99,17.51,5.57s33.04,31.84,39.4,31.05c6.37-.8,9.55-9.55,7.56-13.53s-40.67-32.75-47.36-34.63c-9.53-2.68-21.89-2.39-37.02,0-15.12,2.39-116.22,23.34-116.22,23.34,0,0-13.13,6.12-2.79,17.66Z"
+                                    ></path>
+                                    <path
+                                        class="cls-1"
+                                        d="M308.24,150.76s-.31,6.15-3.98,5.57c-4.97-.78-35.82-33.83-46.17-32.24,0,0,8.53,2.71,18.46,11.64,6.51,5.86,34.42,37.85,31.69,15.03Z"
+                                    ></path>
+                                    <path
+                                        class="cls-4"
+                                        d="M374.79,179.65l90.54-29.78s22.13-5.63,25.35-4.02,17.71,30.58,17.71,33.8-2.42,14.01-5.63,14.89c-2.33.64-5.33.11-6.84-4.21-1.41-4.02-6.84-31.73-12.47-31.47s-50.7,15.95-50.7,15.95c0,0-13.28,6.44-18.91,11.27s-32.19,11.27-32.19,11.27c0,0-9.66-7.65-6.84-17.71Z"
+                                    ></path>
+                                    <path
+                                        class="cls-1"
+                                        d="M381.34,180.1s102.27-35.19,107.85-31.99c0,0-18.2,2.49-41.76,11.88s-66.09,22.03-66.09,22.03v-1.92Z"
+                                    ></path>
+                                    <path
+                                        class="cls-1"
+                                        d="M485.36,158.06s3.26,0,4.98,3.45,9.77,24.71,9.77,24.71c0,0,.77,4.98,5.17-2.68,0,0-3.07,9.56-5.36,6.79s-9.77-26.33-9.77-26.33c0,0-2.87-6.74-4.79-5.94Z"
+                                    ></path>
+                                </g>
+                                <g id="monture">
+                                    <path
+                                        class="cls-4"
+                                        d="M385.31,180.81c-.24-3.41-9.57-5.22-12.71-6.4-3.14-1.18-15.7,1.96-15.7,1.96-12.17-3.14-54.55-9.03-78.88-9.03s-32.57,11.38-35.32,10.99c-2.75-.39-17.27-.78-23.55-1.96-6.28-1.18-5.1-14.13-39.25-26.48-34.14-12.35-68.29-12.42-68.29-12.42-13.35,4.66-6.76,18.49-6.76,18.49l2.05,6.35c4.32,2.03,3.14,10.52,4.71,23.08s7.46,28.65,14.13,38.46c6.67,9.81,31.79,20.8,44.35,21.19s23.55-1.96,31.79-15.31c8.24-13.34,16.88-36.89,16.88-36.89l10.2,1.57s2.91.31,5.35,3.09,4.43,8.03,7.6,17.31c7.56,22.1,25.12,39.25,25.12,39.25,0,0,5.6,7.43,33.44,12.66,23.08,4.34,42.7-2.46,42.7-2.46,17.72-7.17,21.63-44.96,21.63-44.96,0,0,1.83-13.3,7.81-16.65,7.37-4.14,8.27-4.44,12.71-5.32,3.61-.71.24-13.13,0-16.54ZM190.5,231.32c-9.42,5.1-32.18,7.06-46.31-3.92-14.13-10.99-20.8-30.22-22.76-52.98s7.1-25.23,7.1-25.23c0,0,14.88-.67,34.11,4.03,19.23,4.71,40.42,18.05,40.82,26.69.39,8.63-3.53,46.31-12.95,51.41ZM344.73,255.65c-9.03,4.32-21.47,4.71-31.93,3.92-10.46-.78-37.54-1.57-47.35-31.4,0,0-2.75-14.13-5.1-17.27-2.35-3.14-9.42-14.48-9.42-18.43,0-8.23,7.15-12.97,7.15-12.97,0,0,8.16-5.1,18.75-5.1,10.6,0,64.75,2.75,72.21,12.95,7.46,10.2,7.06,21.98,8.24,31.4,1.18,9.42-3.53,32.57-12.56,36.89Z"
+                                    ></path>
+                                </g>
+                                <g id="verres">
+                                    <path
+                                        class="cls-5"
+                                        d="M116.32,162.87c-.88,6.05.4,37.41,11.44,55.31s37.04,21.35,41.37,21.31,18.51,1.02,24.47-9.27c4.97-8.59,13.17-43.48,9.12-53.05-6.26-14.82-40.4-24.02-40.4-24.02,0,0-26.85-5.46-33.82-4.46,0,0-9.97-.96-12.17,14.17Z"
+                                    ></path>
+                                    <path
+                                        class="cls-5"
+                                        d="M247.32,192.54s-1.09-9.55,19.57-16.69c11.76-4.06,60.46,3.23,60.46,3.23,0,0,19.09,4.06,21.71,8.28,2.62,4.22,9.46,17.24,8.29,37.97-1.14,20.21-7.31,26.8-12.61,30.31,0,0-7.1,4.93-21.34,5.93-26.65,1.88-37.01-1.14-46.19-7.73-29.88-21.46-29.88-61.3-29.88-61.3Z"
+                                    ></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Monture -->
+                <div class="lg:col-span-3">
+                    <div class="bg-base-200 rounded-2xl p-6">
+                        <h2
+                            class="text-2xl font-normal mb-6 pb-3 border-b border-base-300"
+                        >
+                            Monture
+                        </h2>
+
+                        <!-- Couleurs Section -->
+                        <div class="mb-6">
+                            <h3 class="text-base font-normal mb-4">Couleurs</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <!-- Added data-color and data-target attributes for color selection -->
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#000000"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-black"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Noir</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#92400e"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-amber-700"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Écaille</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#3b82f6"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-primary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Bleu</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#ec4899"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-secondary"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Rose</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#ffffff"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-white border border-gray-300"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Blanc</span>
+                                </button>
+
+                                <button
+                                    class="color-btn flex flex-col items-center gap-2 p-3 rounded-xl border-2 border-base-300 hover:border-primary transition bg-base-100"
+                                    data-color="#4ade80"
+                                    data-target="monture"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-green-400"
+                                    >
+                                    </div>
+                                    <span class="text-sm">Vert</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Matériau Section -->
+                        <div>
+                            <h3 class="text-base font-normal mb-4">Matériau</h3>
+                            <!-- Added id to capture materiau value -->
+                            <select
+                                id="materiau-monture"
+                                class="select select-bordered w-full bg-base-100 h-10 text-sm min-h-0"
+                            >
+                                <option selected>Métal</option>
+                                <option>Acétate</option>
+                                <option>Titane</option>
+                                <option>Bois</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section - Sliders and Price -->
+            <div class="mt-2 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Sliders Card -->
+                <div class="bg-base-200 rounded-2xl p-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Taille des verres -->
+                        <div>
+                            <h3 class="text-lg font-normal mb-4">
+                                Taille des verres
+                            </h3>
+                            <div class="relative">
+                                <!-- Added id for slider control -->
+                                <input
+                                    id="lens-size-slider"
+                                    type="range"
+                                    min="48"
+                                    max="56"
+                                    value="52"
+                                    class="range-custom w-full"
+                                />
+                                <div
+                                    class="flex justify-between text-xs text-gray-500 mt-2"
+                                >
+                                    <span>48mm</span>
+                                    <span
+                                        id="lens-size-value"
+                                        class="font-semibold text-base text-black"
+                                        >52mm</span
+                                    >
+                                    <span>56mm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Largeur du pont -->
+                        <div>
+                            <h3 class="text-lg font-normal mb-4">
+                                Largeur du pont
+                            </h3>
+                            <div class="relative">
+                                <!-- Added id for slider control -->
+                                <input
+                                    id="bridge-width-slider"
+                                    type="range"
+                                    min="14"
+                                    max="22"
+                                    value="16"
+                                    class="range-custom w-full"
+                                />
+                                <div
+                                    class="flex justify-between text-xs text-gray-500 mt-2"
+                                >
+                                    <span>14mm</span>
+                                    <span
+                                        id="bridge-width-value"
+                                        class="font-semibold text-base text-black"
+                                        >16mm</span
+                                    >
+                                    <span>22mm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price and Actions Card -->
+                <div class="bg-base-200 rounded-2xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <h3 class="text-lg font-normal">Prix configuré :</h3>
+                        <div class="bg-accent px-6 py-2 rounded-lg">
+                            <span class="text-2xl font-semibold">110 €</span>
+                        </div>
+                    </div>
+
+                    <p class="text-sm text-gray-600 mb-6">Fabriqué en France</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button
+                            class="btn btn-primary text-white border-2 border-black h-10 min-h-0 text-sm"
+                        >
+                            Ajouter au panier
+                        </button>
+                        <!-- Added id for save button -->
+                        <button
+                            id="save-btn"
+                            class="btn btn-primary text-white border-2 border-black h-10 min-h-0 text-sm"
+                        >
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    /* Restored custom range slider styling that was working before */
+    /* Custom range slider styling to match mockup */
+    .range-custom {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        background: #000;
+        border-radius: 9999px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .range-custom::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 2px solid #000;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .range-custom::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 2px solid #000;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+</style>
+
+<!-- Added client-side script for configurator functionality -->
+<script>
+    import { SVGController } from "../js/svg-controller.js";
+    import { GlassesStorage } from "../js/glasses-storage.js";
+
+    // Initialize controllers
+    const svgElement = document.getElementById(
+        "glasses-svg",
+    ) as unknown as SVGElement;
+    const svgController = new SVGController(svgElement);
+    const storage = new GlassesStorage();
+
+    // Color buttons
+    const colorButtons = document.querySelectorAll(".color-btn");
+    colorButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const color = btn.getAttribute("data-color");
+            const target = btn.getAttribute("data-target");
+
+            if (color && target) {
+                if (target === "branches") {
+                    svgController.updateBranchesColor(color);
+                } else if (target === "monture") {
+                    svgController.updateMontureColor(color);
+                }
+            }
+
+            // Update active state
+            const siblings = btn.parentElement?.querySelectorAll(".color-btn");
+            siblings?.forEach((s) => s.classList.remove("border-primary"));
+            btn.classList.add("border-primary");
+        });
+    });
+
+    // Lens size slider
+    const lensSizeSlider = document.getElementById(
+        "lens-size-slider",
+    ) as HTMLInputElement;
+    const lensSizeValue = document.getElementById("lens-size-value");
+
+    lensSizeSlider?.addEventListener("input", (e) => {
+        const value = parseInt((e.target as HTMLInputElement).value);
+        svgController.updateLensSize(value);
+        if (lensSizeValue) {
+            lensSizeValue.textContent = `${value}mm`;
+        }
+    });
+
+    // Bridge width slider
+    const bridgeWidthSlider = document.getElementById(
+        "bridge-width-slider",
+    ) as HTMLInputElement;
+    const bridgeWidthValue = document.getElementById("bridge-width-value");
+
+    bridgeWidthSlider?.addEventListener("input", (e) => {
+        const value = parseInt((e.target as HTMLInputElement).value);
+        svgController.updateBridgeWidth(value);
+        if (bridgeWidthValue) {
+            bridgeWidthValue.textContent = `${value}mm`;
+        }
+    });
+
+    // Save button
+    const saveBtn = document.getElementById("save-btn");
+    saveBtn?.addEventListener("click", async () => {
+        try {
+            const config = svgController.getConfig();
+            const svgString = svgController.getSVGString();
+
+            const materiauSelect = document.getElementById(
+                "materiau-monture",
+            ) as HTMLSelectElement;
+
+            const data = {
+                nom: `Lunettes ${new Date().toLocaleDateString()}`,
+                code_svg: svgString,
+                largeur_pont: config.largeurPont,
+                taille_verre: config.tailleVerre,
+                couleur: config.montureColor,
+                materiau: materiauSelect?.value || "Métal",
+            };
+
+            console.log("[v0] Saving configuration:", data);
+            await storage.saveGlasses(data);
+            alert("Configuration enregistrée avec succès !");
+        } catch (error) {
+            console.error("[v0] Error saving configuration:", error);
+            alert(
+                "Erreur lors de l'enregistrement. Vérifiez que PocketBase est bien configuré.",
+            );
+        }
+    });
+</script>
