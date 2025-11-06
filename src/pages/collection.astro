@@ -67,7 +67,7 @@ import Footer from "../components/Footer.astro";
 
 <script>
     import { CollectionManager } from "../js/collection-manager.js";
-    import pb from "../lib/pocketbase";
+    import pb from "../utils/pb";
 
     const glassesGrid = document.getElementById("glasses-grid");
     const emptyState = document.getElementById("empty-state");
@@ -146,9 +146,9 @@ import Footer from "../components/Footer.astro";
       </div>
 
       <div class="flex flex-col gap-2 mt-auto">
-        <button class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm" disabled>
+        <a href="/generateur?id=${glass.id}&collection=paire_lunettes" class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm">
           Modifier à l'aide de l'IA
-        </button>
+        </a>
         <button class="btn btn-error border-2 border-black h-10 min-h-0 text-sm delete-btn">
           Supprimer
         </button>

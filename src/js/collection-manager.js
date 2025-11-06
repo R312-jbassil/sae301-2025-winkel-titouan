@@ -1,7 +1,7 @@
 /**
  * Collection Manager - Manages user's glasses collection
  */
-import pb from "../lib/pocketbase"
+import pb from "../utils/pb"
 
 export class CollectionManager {
     constructor() {

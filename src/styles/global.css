@@ -1,7 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Century+Schoolbook:wght@400;700&display=swap");
+
 @import "tailwindcss";
 @plugin "daisyui";
-
-@import url("https://fonts.googleapis.com/css2?family=Century+Schoolbook:wght@400;700&display=swap");
 
 /* Adding DaisyUI theme plugin configuration for "tavue" theme */
 @plugin "daisyui/theme" {
@@ -78,6 +78,10 @@ body {
     border-radius: var(--radius-selector);
     font-weight: 600;
     border: none;
+    /* Added min-height and max-height to prevent button stretching */
+    min-height: 3rem;
+    max-height: 3rem;
+    height: 3rem;
 }
 
 .btn-primary:hover {
@@ -90,6 +94,10 @@ body {
     border-radius: var(--radius-selector);
     font-weight: 600;
     border: none;
+    /* Added min-height and max-height to prevent button stretching */
+    min-height: 3rem;
+    max-height: 3rem;
+    height: 3rem;
 }
 
 .btn-secondary:hover {
@@ -102,6 +110,10 @@ body {
     border: 1.5px solid var(--color-neutral-content);
     border-radius: var(--radius-selector);
     font-weight: 500;
+    /* Added min-height and max-height to prevent button stretching */
+    min-height: 3rem;
+    max-height: 3rem;
+    height: 3rem;
 }
 
 /* Reduced input heights and padding */

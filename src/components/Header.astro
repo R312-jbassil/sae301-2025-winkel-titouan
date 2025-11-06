@@ -24,7 +24,7 @@
                     >Configurateur</a
                 >
                 <a
-                    href="#"
+                    href="/generateur"
                     class="text-base-content hover:text-primary transition font-medium"
                     >Générer avec IA</a
                 >
@@ -55,11 +55,18 @@
 </header>
 
 <script>
-    import pb from "../lib/pocketbase";
+    import pb from "../utils/pb";
 
-    // Check if user is already authenticated
     const authStatusBtn = document.getElementById("auth-status-btn");
     const logoutBtn = document.getElementById("logout-btn");
+
+    if (authStatusBtn) {
+        authStatusBtn.addEventListener("click", () => {
+            if (!pb.authStore.isValid) {
+                window.location.href = "/";
+            }
+        });
+    }
 
     if (pb.authStore.isValid && pb.authStore.model) {
         const user = pb.authStore.model;

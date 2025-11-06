@@ -553,9 +553,43 @@ import Footer from "../components/Footer.astro";
             const config = svgController.getConfig();
             const svgString = svgController.getSVGString();
 
-            const materiauSelect = document.getElementById(
+            const materiauBranchesSelect = document.getElementById(
+                "materiau-branches",
+            ) as HTMLSelectElement;
+            const materiauMontureSelect = document.getElementById(
                 "materiau-monture",
             ) as HTMLSelectElement;
+
+            // Get raw values with fallback
+            const materiauBranchesRaw =
+                materiauBranchesSelect?.value || "Métal";
+            const materiauMontureRaw = materiauMontureSelect?.value || "Métal";
+
+            console.log(
+                "[v0] Raw values - branches:",
+                materiauBranchesRaw,
+                "monture:",
+                materiauMontureRaw,
+            );
+
+            // Normalize to lowercase for PocketBase
+            const materiauMap: Record<string, string> = {
+                Métal: "metal",
+                Acétate: "acetate",
+                Titane: "titane",
+                Bois: "bois",
+            };
+
+            const materiauBranches =
+                materiauMap[materiauBranchesRaw] || "metal";
+            const materiauMonture = materiauMap[materiauMontureRaw] || "metal";
+
+            console.log(
+                "[v0] Normalized values - branches:",
+                materiauBranches,
+                "monture:",
+                materiauMonture,
+            );
 
             const data = {
                 nom: `Lunettes ${new Date().toLocaleDateString()}`,
@@ -563,10 +597,11 @@ import Footer from "../components/Footer.astro";
                 largeur_pont: config.largeurPont,
                 taille_verre: config.tailleVerre,
                 couleur: config.montureColor,
-                materiau: materiauSelect?.value || "Métal",
+                materiau_branche: materiauBranches,
+                materiau_monture: materiauMonture,
             };
 
-            console.log("[v0] Saving configuration:", data);
+            console.log("[v0] Final data object:", data);
             await storage.saveGlasses(data);
 
             successNotification?.classList.remove("hidden");

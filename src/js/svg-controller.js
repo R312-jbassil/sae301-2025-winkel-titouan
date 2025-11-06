@@ -41,41 +41,38 @@ export class SVGController {
     }
 
     /**
-     * Update lens size (48-56mm)
+     * Update monture transform combining both width and height scales
      */
-    updateLensSize(size) {
-        console.log("[v0] Updating lens size to:", size)
-        this.config.tailleVerre = size
-        const verres = this.svg.querySelector("#verres")
-
-        if (verres) {
-            const scale = size / 52
-            verres.style.transform = `scale(${scale})`
-            verres.style.transformOrigin = "center center"
-            verres.style.transformBox = "fill-box"
-            console.log("[v0] Lens size updated, scale:", scale)
+    updateMontureTransform() {
+        const monture = this.svg.querySelector("#monture")
+        if (monture) {
+            const scaleX = this.config.largeurPont / 16
+            const scaleY = this.config.tailleVerre / 52
+            monture.style.transform = `scale(${scaleX}, ${scaleY})`
+            monture.style.transformOrigin = "center center"
+            monture.style.transformBox = "fill-box"
+            console.log("[v0] Monture transform updated - scaleX:", scaleX, "scaleY:", scaleY)
         } else {
-            console.error("[v0] #verres element not found in SVG")
+            console.error("[v0] #monture element not found in SVG")
         }
     }
 
     /**
-     * Update bridge width (14-22mm)
+     * Update lens size (48-56mm) - affects monture height
+     */
+    updateLensSize(size) {
+        console.log("[v0] Updating lens size to:", size)
+        this.config.tailleVerre = size
+        this.updateMontureTransform()
+    }
+
+    /**
+     * Update bridge width (14-22mm) - affects monture width
      */
     updateBridgeWidth(width) {
         console.log("[v0] Updating bridge width to:", width)
         this.config.largeurPont = width
-        const monture = this.svg.querySelector("#monture")
-
-        if (monture) {
-            const scale = width / 16
-            monture.style.transform = `scaleX(${scale})`
-            monture.style.transformOrigin = "center center"
-            monture.style.transformBox = "fill-box"
-            console.log("[v0] Bridge width updated, scale:", scale)
-        } else {
-            console.error("[v0] #monture element not found in SVG")
-        }
+        this.updateMontureTransform()
     }
 
     /**

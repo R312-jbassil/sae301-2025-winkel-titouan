@@ -1,7 +1,7 @@
 /**
  * Glasses Storage - Manages PocketBase interactions
  */
-import pb from "../lib/pocketbase"
+import pb from "../utils/pb"
 
 export class GlassesStorage {
     constructor() {
@@ -21,6 +21,8 @@ export class GlassesStorage {
                 largeur_pont: Number(data.largeur_pont),
                 taille_verre: Number(data.taille_verre),
                 couleur: data.couleur,
+                materiau_branche: data.materiau_branche,
+                materiau_monture: data.materiau_monture,
             }
 
             console.log("[v0] Prepared record data:", recordData)
@@ -32,10 +34,8 @@ export class GlassesStorage {
                 const userId = pb.authStore.model?.id
                 const user = await pb.collection("users").getOne(userId)
 
-                // Get existing paire_personnalisee array or create empty array
                 const existingPaires = user.paire_personnalisee || []
 
-                // Add new glasses ID to the array
                 await pb.collection("users").update(userId, {
                     paire_personnalisee: [...existingPaires, record.id],
                 })
