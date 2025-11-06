@@ -120,14 +120,14 @@ export class GeneratedSVGStorage {
                 recordData.nom = data.nom
             }
 
-            console.log("[v0] Update data:", recordData)
+            console.log("Update data:", recordData)
 
             const record = await pb.collection(collection).update(id, recordData)
-            console.log("[v0] SVG updated successfully:", record.id)
+            console.log("SVG updated successfully:", record.id)
 
             return record
         } catch (error) {
-            console.error("[v0] Error updating SVG:", error)
+            console.error("Error updating SVG:", error)
             throw error
         }
     }
