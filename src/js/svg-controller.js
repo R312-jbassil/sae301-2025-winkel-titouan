@@ -51,9 +51,6 @@ export class SVGController {
             monture.style.transform = `scale(${scaleX}, ${scaleY})`
             monture.style.transformOrigin = "center center"
             monture.style.transformBox = "fill-box"
-            console.log("[v0] Monture transform updated - scaleX:", scaleX, "scaleY:", scaleY)
-        } else {
-            console.error("[v0] #monture element not found in SVG")
         }
     }
 
@@ -61,7 +58,6 @@ export class SVGController {
      * Update lens size (48-56mm) - affects monture height
      */
     updateLensSize(size) {
-        console.log("[v0] Updating lens size to:", size)
         this.config.tailleVerre = size
         this.updateMontureTransform()
     }
@@ -70,7 +66,6 @@ export class SVGController {
      * Update bridge width (14-22mm) - affects monture width
      */
     updateBridgeWidth(width) {
-        console.log("[v0] Updating bridge width to:", width)
         this.config.largeurPont = width
         this.updateMontureTransform()
     }

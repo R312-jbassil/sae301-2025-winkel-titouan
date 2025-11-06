@@ -74,7 +74,7 @@ const { id, nom, code_svg, taille_verre, largeur_pont, couleur } = Astro.props;
                             emptyState?.classList.remove("hidden");
                         }
                     } catch (error) {
-                        console.error("[v0] Error deleting glasses:", error);
+                        console.error("Error deleting glasses:", error);
                         alert(
                             "Erreur lors de la suppression. Veuillez réessayer.",
                         );

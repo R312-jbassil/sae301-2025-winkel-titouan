@@ -47,9 +47,7 @@ export class GeneratedSVGStorage {
 
             return record
         } catch (error) {
-            console.error("[v0] Error saving SVG:", error)
-            console.error("[v0] Error response:", error.response)
-            console.error("[v0] Error data:", JSON.stringify(error.data, null, 2))
+            console.error("Error saving SVG:", error)
             throw error
         }
     }
@@ -63,7 +61,7 @@ export class GeneratedSVGStorage {
             console.log("[v0] SVG loaded successfully:", record.id)
             return record
         } catch (error) {
-            console.error("[v0] Error loading SVG:", error)
+            console.error("Error loading SVG:", error)
             throw error
         }
     }
@@ -85,7 +83,7 @@ export class GeneratedSVGStorage {
             console.log("[v0] Loaded user SVGs:", svgs.length)
             return svgs
         } catch (error) {
-            console.error("[v0] Error loading user SVGs:", error)
+            console.error("Error loading user SVGs:", error)
             throw error
         }
     }
@@ -99,7 +97,7 @@ export class GeneratedSVGStorage {
             console.log("[v0] SVG deleted successfully:", id)
             return true
         } catch (error) {
-            console.error("[v0] Error deleting SVG:", error)
+            console.error("Error deleting SVG:", error)
             throw error
         }
     }
@@ -120,10 +118,10 @@ export class GeneratedSVGStorage {
                 recordData.nom = data.nom
             }
 
-            console.log("Update data:", recordData)
+            console.log("[v0] Update data:", recordData)
 
             const record = await pb.collection(collection).update(id, recordData)
-            console.log("SVG updated successfully:", record.id)
+            console.log("[v0] SVG updated successfully:", record.id)
 
             return record
         } catch (error) {

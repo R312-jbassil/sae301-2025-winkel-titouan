@@ -199,7 +199,7 @@ import Footer from "../components/Footer.astro";
       alert("Inscription réussie ! Vous êtes maintenant connecté.");
       window.location.reload();
     } catch (error: any) {
-      console.error("[v0] Signup error:", error);
+      console.error("Signup error:", error);
       signupError.textContent =
         error.message || "Une erreur est survenue lors de l'inscription.";
       signupError.classList.remove("hidden");
@@ -229,7 +229,7 @@ import Footer from "../components/Footer.astro";
       alert("Connexion réussie !");
       window.location.reload();
     } catch (error: any) {
-      console.error("[v0] Login error:", error);
+      console.error("Login error:", error);
       loginError.textContent = "Identifiant ou mot de passe incorrect.";
       loginError.classList.remove("hidden");
     }

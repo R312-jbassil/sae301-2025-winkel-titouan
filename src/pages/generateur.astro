@@ -162,7 +162,7 @@ import Footer from "../components/Footer.astro";
                     `Vous modifiez "${editName}". Décrivez les modifications que vous souhaitez apporter.`,
                 );
             } catch (error) {
-                console.error("[v0] Error loading SVG:", error);
+                console.error("Error loading SVG:", error);
                 addMessageToChat(
                     "assistant",
                     "Erreur lors du chargement du SVG. Veuillez réessayer.",
@@ -243,7 +243,7 @@ import Footer from "../components/Footer.astro";
             editButton.disabled = false;
             saveButton.disabled = false;
         } catch (error) {
-            console.error("[v0] Error generating SVG:", error);
+            console.error("Error generating SVG:", error);
             svgContainer.innerHTML =
                 '<p class="text-red-500">Erreur lors de la génération</p>';
             addMessageToChat(
@@ -297,7 +297,7 @@ import Footer from "../components/Footer.astro";
             // Add AI message to chat
             addMessageToChat("assistant", "SVG modifié avec succès !");
         } catch (error) {
-            console.error("[v0] Error editing SVG:", error);
+            console.error("Error editing SVG:", error);
             addMessageToChat(
                 "assistant",
                 "Désolé, une erreur est survenue. Veuillez réessayer.",
@@ -311,20 +311,18 @@ import Footer from "../components/Footer.astro";
     async function handleSave() {
         if (editMode && editId && editCollection) {
             const svgCode = svgOutput.textContent;
-            console.log("[v0] Updating existing SVG:", editId);
 
             try {
                 await pb.collection(editCollection).update(editId, {
                     code_svg: svgCode || "<svg></svg>",
                 });
 
-                console.log("[v0] SVG updated successfully");
                 alert("SVG mis à jour avec succès !");
 
                 // Redirect to collection
                 window.location.href = "/collection";
             } catch (error) {
-                console.error("[v0] Error updating SVG:", error);
+                console.error("Error updating SVG:", error);
                 alert("Erreur lors de la mise à jour : " + error.message);
             }
         } else {
@@ -332,7 +330,6 @@ import Footer from "../components/Footer.astro";
             if (!name) return;
 
             const svgCode = svgOutput.textContent;
-            console.log("[v0] Saving new SVG:", svgCode);
 
             try {
                 const result = await storage.saveSVG({
@@ -340,10 +337,9 @@ import Footer from "../components/Footer.astro";
                     code_svg: svgCode || "<svg></svg>",
                 });
 
-                console.log("[v0] SVG saved successfully:", result);
                 alert("SVG sauvegardé avec succès !");
             } catch (error) {
-                console.error("[v0] Error saving SVG:", error);
+                console.error("Error saving SVG:", error);
                 alert("Erreur lors de la sauvegarde : " + error.message);
             }
         }

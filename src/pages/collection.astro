@@ -113,7 +113,7 @@ import Footer from "../components/Footer.astro";
 
             glassesGrid?.classList.remove("hidden");
         } catch (error) {
-            console.error("[v0] Error loading glasses:", error);
+            console.error("Error loading glasses:", error);
             loadingState?.classList.add("hidden");
             errorState?.classList.remove("hidden");
         }
@@ -124,14 +124,15 @@ import Footer from "../components/Footer.astro";
         card.className =
             "bg-base-200 rounded-2xl p-6 flex flex-col glasses-card";
         card.setAttribute("data-glass-id", glass.id);
+        card.setAttribute("data-collection", glass._collection);
 
         card.innerHTML = `
       <div class="mb-4">
         <h3 class="text-xl font-normal mb-2">${glass.nom || "Sans nom"}</h3>
         <div class="text-sm text-gray-600">
-          <p>Taille: ${glass.taille_verre}mm</p>
-          <p>Pont: ${glass.largeur_pont}mm</p>
-          <p>Couleur: ${glass.couleur}</p>
+          <p>Taille: ${glass.taille_verre || "N/A"}mm</p>
+          <p>Pont: ${glass.largeur_pont || "N/A"}mm</p>
+          <p>Couleur: ${glass.couleur || "N/A"}</p>
         </div>
       </div>
 
@@ -146,7 +147,7 @@ import Footer from "../components/Footer.astro";
       </div>
 
       <div class="flex flex-col gap-2 mt-auto">
-        <a href="/generateur?id=${glass.id}&collection=paire_lunettes" class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm">
+        <a href="/generateur?id=${glass.id}&collection=${glass._collection}" class="btn btn-primary border-2 border-black h-10 min-h-0 text-sm">
           Modifier à l'aide de l'IA
         </a>
         <button class="btn btn-error border-2 border-black h-10 min-h-0 text-sm delete-btn">
@@ -164,7 +165,8 @@ import Footer from "../components/Footer.astro";
             ) {
                 try {
                     const manager = new CollectionManager();
-                    await manager.deleteGlasses(glass.id);
+                    const collectionName = card.getAttribute("data-collection");
+                    await manager.deleteGlasses(glass.id, collectionName);
                     card.remove();
 
                     const remainingCards =
@@ -174,7 +176,7 @@ import Footer from "../components/Footer.astro";
                         emptyState?.classList.remove("hidden");
                     }
                 } catch (error) {
-                    console.error("[v0] Error deleting glasses:", error);
+                    console.error("Error deleting glasses:", error);
                     alert("Erreur lors de la suppression. Veuillez réessayer.");
                 }
             }

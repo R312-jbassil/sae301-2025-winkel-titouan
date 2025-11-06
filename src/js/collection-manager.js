@@ -5,43 +5,54 @@ import pb from "../utils/pb"
 
 export class CollectionManager {
     constructor() {
-        this.collectionName = "paire_lunettes"
+        this.glassesCollection = "paire_lunettes"
+        this.generatedCollection = "paire_generee"
         this.usersCollection = "users"
     }
 
     /**
-     * Get all glasses for the current user
+     * Get all glasses for the current user (both configured and AI-generated)
      */
     async getUserGlasses() {
         try {
             if (!pb.authStore.isValid) {
-                console.log("[v0] User not authenticated")
                 return []
             }
 
             const userId = pb.authStore.model?.id
-            console.log("[v0] Fetching glasses for user:", userId)
-            console.log("[v0] User model:", pb.authStore.model)
 
             const user = await pb.collection(this.usersCollection).getOne(userId, {
-                expand: "paire_personnalisee",
+                expand: "paire_personnalisee,paire_generee",
             })
 
-            console.log("[v0] User data:", user)
-            console.log("[v0] Expanded paire_personnalisee:", user.expand?.paire_personnalisee)
-
-            const glasses = user.expand?.paire_personnalisee || []
-
-            // If glasses is not an array, convert it to array
-            if (!Array.isArray(glasses)) {
-                console.log("[v0] Converting single glass to array")
-                return [glasses]
+            // Get configured glasses
+            let configuredGlasses = user.expand?.paire_personnalisee || []
+            if (!Array.isArray(configuredGlasses)) {
+                configuredGlasses = [configuredGlasses]
             }
+            // Add collection identifier
+            configuredGlasses = configuredGlasses.map((glass) => ({
+                ...glass,
+                _collection: "paire_lunettes",
+            }))
 
-            return glasses
+            // Get AI-generated glasses
+            let generatedGlasses = user.expand?.paire_generee || []
+            if (!Array.isArray(generatedGlasses)) {
+                generatedGlasses = [generatedGlasses]
+            }
+            // Add collection identifier
+            generatedGlasses = generatedGlasses.map((glass) => ({
+                ...glass,
+                _collection: "paire_generee",
+            }))
+
+            // Merge both collections
+            const allGlasses = [...configuredGlasses, ...generatedGlasses]
+
+            return allGlasses
         } catch (error) {
-            console.error("[v0] Error loading user glasses:", error)
-            console.error("[v0] Error details:", error.data)
+            console.error("Error loading user glasses:", error)
             throw error
         }
     }
@@ -49,13 +60,11 @@ export class CollectionManager {
     /**
      * Delete a glasses configuration
      */
-    async deleteGlasses(glassesId) {
+    async deleteGlasses(glassesId, collectionName) {
         try {
-            console.log("[v0] Deleting glasses:", glassesId)
-            await pb.collection(this.collectionName).delete(glassesId)
-            console.log("[v0] Glasses deleted successfully")
+            await pb.collection(collectionName).delete(glassesId)
         } catch (error) {
-            console.error("[v0] Error deleting glasses:", error)
+            console.error("Error deleting glasses:", error)
             throw error
         }
     }
